@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Ninja Gold</title>
+	<style>
+		.won{
+			background-color: green;
+		}
+		.lost{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<h1>Let's earn some gold!</h1>
+	<h3>You have {{session['gold']}} gold!</h3>
+	<a href='/ninja/reset'>RESET THE HISTORY</a>
+	<hr>
+	<p> Explore the abandoned farm!<p>
+	<form action='/ninja/explore' method='post'>
+		<input type='hidden' name='location' value='farm'>
+		<input type='submit' value='Find Gold!'>
+	</form>
+	<hr>
+	<p>Delve into the murky cave!</p>
+	<form action='/ninja/explore' method='post'>
+		<input type='hidden' name='location' value='cave'>
+		<input type='submit' value='Find Gold!'>
+	</form>
+	<hr>
+	<p>Dig in the couch cushions for some spare change!</p>
+	<form action='/ninja/explore' method='post'>
+		<input type='hidden' name='location' value='house'>
+		<input type='submit' value='Find Gold!'>
+	</form>
+	<hr>
+	<p>Gamble away your winnings!</p>
+	<form action='/ninja/explore' method='post'>
+		<input type='hidden' name='location' value='casino'>
+		<input type='submit' value='Find Gold!'>
+	</form>
+
+	{% for each in session['history'] | reverse %}
+		<p class='{{each.cssclass}}'>You {{each.cssclass}} {{each.profit}} at the {{each.location}}</p>
+	{% endfor %}
+
+</body>
+</html>
